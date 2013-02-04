@@ -81,7 +81,7 @@ fi
 #done
 
 MESSAGE="$*"
-
-curl "${metafridgeURL}${metafridgeCGI}" --data "lauftext=${MESSAGE}&playfunction=${STYLE}"
+echo "${metafridgeURL}${metafridgeCGI}" --data "lauftext=${MESSAGE}&playfunction=${STYLE}"
+curl -v "${metafridgeURL}${metafridgeCGI}" --data-urlencode "lauftext=${MESSAGE}" --data "&playfunction=${STYLE}"
 
 # EOF
