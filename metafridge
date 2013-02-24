@@ -15,6 +15,16 @@ BREAKING=0
 STYLE=0
 
 USAGE="Usage: `basename $0` [-bhk][-s style] message
+
+-b
+    Breaking news message, immediately overrides existing message
+
+-h
+    Displays this help text
+
+-k
+    kill a mocking bird, do not send the message to twitter as well. (Perfect for automated jobs that only make sense when seen on location, or for testing.)
+
 Available Styles:
     scrollnormal
     scrollfast
@@ -22,7 +32,8 @@ Available Styles:
     blinkslow
     blinkfast
     blinkstrobo
-    sinewave"
+    sinewave
+"
 
 # Updated metafridge interface does not accept scrollup and scrolldown at the moment
 
