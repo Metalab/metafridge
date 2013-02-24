@@ -1,11 +1,30 @@
 #!/bin/bash
 # Posts to the metafridge from the shell.
 
+# Defaults
 metafridgeURL="http://metafridge.metalab.at"
 metafridgeCGI="/cgi-bin/post_text.cgi"
 
+# If you do not want your message to go to twitter
+KILLMOCKINGBIRD=0
 
-USAGE="Usage: `basename $0` [-h][-s style] message
+# Normally messages are not breaking
+BREAKING=0
+
+# animation style. Default is scrollnormal
+STYLE=0
+
+USAGE="Usage: `basename $0` [-bhk][-s style] message
+
+-b
+    Breaking news message, immediately overrides existing message
+
+-h
+    Displays this help text
+
+-k
+    kill a mocking bird, do not send the message to twitter as well. (Perfect for automated jobs that only make sense when seen on location, or for testing.)
+
 Available Styles:
     scrollnormal
     scrollfast
@@ -13,46 +32,54 @@ Available Styles:
     blinkslow
     blinkfast
     blinkstrobo
-    scrollup
-    scrolldown
-    sinewave"
+    sinewave
+"
+
+# Updated metafridge interface does not accept scrollup and scrolldown at the moment
 
 # Parse command line options.
-while getopts hs: OPT; do
+while getopts bhks: OPT; do
     case "$OPT" in
+        b)
+            # BREAKING NEWS message, interrupts all other messages.
+            BREAKING=1
+            ;;
         h)
             echo Help: $USAGE
             exit 0
+            ;;
+        k)
+            KILLMOCKINGBIRD=1
             ;;
         s)
             PASSEDSTYLE=$OPTARG
             case "$PASSEDSTYLE" in
                 scrollnormal)
-                    STYLE=1
+                    STYLE=0
                     ;;
                 scrollfast)
-                    STYLE=2
+                    STYLE=1
                     ;;
                 scrolltoofast)
-                    STYLE=3
+                    STYLE=2
                     ;;
                 blinkslow)
-                    STYLE=4
+                    STYLE=3
                     ;;
                 blinkfast)
-                    STYLE=5
+                    STYLE=4
                     ;;
                 blinkstrobo)
-                    STYLE=6
+                    STYLE=5
                     ;;
-                scrollup)
-                    STYLE=7
-                    ;;
-                scrollup)
-                    STYLE=8
-                    ;;
+#                scrollup)
+#                    STYLE=7
+#                    ;;
+#                scrollup)
+#                    STYLE=8
+#                    ;;
                 sinewave)
-                    STYLE=9
+                    STYLE=8
                     ;;
             esac
             ;;
@@ -81,7 +108,7 @@ fi
 #done
 
 MESSAGE="$*"
-echo "${metafridgeURL}${metafridgeCGI}" --data "lauftext=${MESSAGE}&playfunction=${STYLE}"
-curl -v "${metafridgeURL}${metafridgeCGI}" --data-urlencode "lauftext=${MESSAGE}" --data "&playfunction=${STYLE}"
+echo curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}" --data "breaking_msg=$BREAKING" --data-urlencode "scroll_text=${MESSAGE}"
+curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}"  --get --data-urlencode "scroll_text=${MESSAGE}" --data "breaking_msg=$BREAKING" 
 
 # EOF
