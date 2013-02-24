@@ -13,9 +13,9 @@ Available Styles:
     blinkslow
     blinkfast
     blinkstrobo
-    scrollup
-    scrolldown
     sinewave"
+
+# Updated metafridge interface does not accept scrollup and scrolldown at the moment
 
 # Parse command line options.
 while getopts hs: OPT; do
