@@ -27,7 +27,7 @@ Available Styles:
 # Updated metafridge interface does not accept scrollup and scrolldown at the moment
 
 # Parse command line options.
-while getopts hs: OPT; do
+while getopts bhks: OPT; do
     case "$OPT" in
         b)
             # BREAKING NEWS message, interrupts all other messages.
@@ -98,7 +98,6 @@ fi
 
 MESSAGE="$*"
 echo curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}" --data "breaking_msg=$BREAKING" --data-urlencode "scroll_text=${MESSAGE}"
-curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}" --data "breaking_msg=$BREAKING"  --get --data-urlencode "scroll_text=${MESSAGE}"
-# curl -v "${metafridgeURL}${metafridgeCGI}?killmockingbird=$KILLMOCKINGBIRD&effect=${STYLE}&breaking_msg=$BREAKING&scroll_text=${MESSAGE}"
+curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}"  --get --data-urlencode "scroll_text=${MESSAGE}" --data "breaking_msg=$BREAKING" 
 
 # EOF
