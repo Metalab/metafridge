@@ -5,7 +5,9 @@ A command line tool to control the fridge at the Metalab.
 
 USAGE: metafridge [-h][-s style] message
 
+-b: Breaking News  
 -h: Show help  
+-k: Kill a mocking bird. Do not post to Twitter.  
 -s style:  
 	 Available Styles:
 		scrollnormal
@@ -14,8 +16,6 @@ USAGE: metafridge [-h][-s style] message
 		blinkslow
 		blinkfast
 		blinkstrobo
-		scrollup
-		scrolldown
 		sinewave
 
 Use this tool to update the LED Matrix on the Metafridge. You can see the result at [The metafridge webinterface][2].
