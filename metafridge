@@ -108,7 +108,6 @@ fi
 #done
 
 MESSAGE="$*"
-echo curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}" --data "breaking_msg=$BREAKING" --data-urlencode "scroll_text=${MESSAGE}"
 curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}"  --get --data-urlencode "scroll_text=${MESSAGE}" --data "breaking_msg=$BREAKING" 
 
 # EOF
