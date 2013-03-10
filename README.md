@@ -5,7 +5,6 @@ A command line tool to control the fridge at the Metalab.
 
 USAGE: metafridge [-h][-s style] message
 
--b: Breaking News  
 -h: Show help  
 -k: Kill a mocking bird. Do not post to Twitter.  
 -s style:  

@@ -14,10 +14,7 @@ BREAKING=0
 # animation style. Default is scrollnormal
 STYLE=0
 
-USAGE="Usage: `basename $0` [-bhk][-s style] message
-
--b
-    Breaking news message, immediately overrides existing message
+USAGE="Usage: `basename $0` [-hk][-s style] message
 
 -h
     Displays this help text
@@ -38,12 +35,8 @@ Available Styles:
 # Updated metafridge interface does not accept scrollup and scrolldown at the moment
 
 # Parse command line options.
-while getopts bhks: OPT; do
+while getopts hks: OPT; do
     case "$OPT" in
-        b)
-            # BREAKING NEWS message, interrupts all other messages.
-            BREAKING=1
-            ;;
         h)
             echo Help: $USAGE
             exit 0
@@ -108,6 +101,6 @@ fi
 #done
 
 MESSAGE="$*"
-curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}"  --get --data-urlencode "scroll_text=${MESSAGE}" --data "breaking_msg=$BREAKING" 
+curl -v "${metafridgeURL}${metafridgeCGI}" --data "killmockingbird=$KILLMOCKINGBIRD"  --data "effect=${STYLE}"  --get --data-urlencode "scroll_text=${MESSAGE}"
 
 # EOF
