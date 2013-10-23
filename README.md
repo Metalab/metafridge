@@ -1,7 +1,7 @@
 metafridge
 ==========
 
-A command line tool to control the fridge at the Metalab.
+A command line tool to control the fridge at the Metalab. (and the whole Metafridge Fonera code)
 
 USAGE: metafridge [-h][-s style] message
 

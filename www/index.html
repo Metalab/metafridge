@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Metafridge</title>
+  <meta name="author" content="hmw">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style type="text/css">
+    * { margin:0; padding:0; }
+    .nocss { display:none; }
+    .hidden { visibility:hidden; }
+    html { height:100%; }
+    body { width:950px; margin:0 auto; background:#888 url(/kuehlschrank.jpg) top center no-repeat; color:#fff; }
+    a         { color:#aa0; }
+    a:hover   { color:#ff0; }
+    a:visited { color:#993; }
+    a:active  { color:#f90; }
+    span[title] { border-bottom:dashed 1px #888; cursor:pointer; }
+    #livestream_wrapper { position:absolute; top:33px; left:50%; width:768px; height:165px; margin-left:-395px; overflow:hidden; }
+    #livestream_img { position:relative; top:-685px; left:-280px; width:1260px; margin:0 auto; }
+    #textform { position:relative; left:-10px; width:768px; margin:200px auto 1em; }
+    input { margin:0.25em; }
+    input[type=text] { width:100%; border:solid 1px #666; margin:0 -3px 0.5em; padding:2px;
+      background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90CEA8IHnEnUfgAAAAZSURBVCjPY/z//78aAwmAiYFEMKphpGgAAEwXAzuTu69EAAAAAElFTkSuQmCC)
+      repeat; color:#f10; font-size:26px;
+     }
+    p { display:inline-block; width:49%; text-align:center; }
+    #supress_twitter { position:absolute; top:0; right:0; }
+    #cgi_output { position:absolute; top:0; left:0; width:100%; height:100%; color:#fff; font-family:monospace; }
+    #cms { display:none; 
+  </style>
+  <script type="text/javascript" src="metafridge.js"></script>
+</head>
+<body>
+
+  <h1 class="nocss">Metafridge</h1>
+
+  <div id="livestream_wrapper">
+    <img src="/camera" id="livestream_img" alt="Realtime webcam image of the Metafridge display">
+    <div id="cgi_output"></div>
+  </div>
+
+  <form id="textform" action="/cgi-bin/post_text.cgi" method="post" accept-charset="utf-8" onSubmit="return false;">
+    <div>
+      <label for="scroll_text">(New) Scroll Text:</label>
+      <input type="text" name="scroll_text" id="scroll_text">
+    </div>
+    <p>
+      <input type="submit" id="effect_0" value="Run normal speed">
+      <input type="submit" id="effect_1" value="Run faster speed">
+      <input type="submit" id="effect_2" value="Run too fast ;)">
+    </p>
+    <p>
+      <input type="submit" id="effect_3" value="Blink slow">
+      <input type="submit" id="effect_4" value="Blink fast">
+      <input type="submit" id="effect_5" value="Strobo.blink">
+    </p>
+    <p>
+      <input type="submit" id="effect_6" value="Vertical Scroll UP"   disabled="disabled">
+      <input type="submit" id="effect_7" value="Vertical Scroll DOWN" disabled="disabled">
+    </p>
+    <p>
+      <input type="submit" id="effect_8" value="Fade In"  disabled="disabled">
+      <input type="submit" id="effect_9" value="Fade Out" disabled="disabled">
+      <input type="submit" id="effect_f" value="Wave">
+    </p>
+  </form>
+
+  <div id="cms">
+    <hr class="nocss">
+    <h2 class="nocss">Developer Tools</h2>
+    <!-- http://en.wikipedia.org/wiki/Access_key#Access_in_different_Browsers -->
+    <ul title="Try SHIFT-CTRL or just CTRL with the access key (Depends on the browser)">
+      <li><span>&uarr;M</span> <a accesskey="m" href="http://validator.w3.org/check/referer" title="Check this page's markup for errors">Validate HTML</a>
+      <li><span>&uarr;N</span> <a accesskey="n" href="http://jigsaw.w3.org/css-validator/check/referer" title="Check this page's style sheet(s) for errors">Validate CSS</a>
+    </ul>
+  </div>
+
+</body>
+</html>
