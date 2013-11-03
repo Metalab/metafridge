@@ -15,11 +15,17 @@ FUNCTION="\x0$effect"
 echo "Saving text..<br>"
 
 # Keep the following line in sync with ./cron_job/send_time.sh
-current_time=`date | awk '{ print $4 }' | awk -F : '{ print $1$2$3 }'`
+current_time=`date +"%H%M%S"`
 
-scroll_text=`echo $scroll_text | sed 's/%C3%84/A"/g' | sed 's/%C3%96/O"/g' | sed 's/%C3%9C/U"/g' | sed 's/%C3%A4/a"/g' | sed 's/%C3%B6/o"/g' | sed 's/%C3%BC/u"/g' | sed 's/%C3%9F/sz/g'`
+scroll_text=`echo $scroll_text | sed 's/%C3%84/Ae/g' | sed 's/%C3%96/Oe/g' | sed 's/%C3%9C/Ue/g' | sed 's/%C3%A4/ae/g' | sed 's/%C3%B6/oe/g' | sed 's/%C3%BC/ue/g' | sed 's/%C3%9F/sz/g'`
 scroll_text="`httpd -d $scroll_text`"
-		
+
+# Checking for non-ascii characters
+nonascii=$( echo $scroll_text | grep '[^[:print:]]' );
+if [ "$nonascii" != "" ]; then
+	echo "Sorry, it's not happening.</br>"
+	exit 1
+fi		
 		
 has_tux=$( echo $scroll_text | grep -i fosstux );
 if [ "$has_tux" != "" ]; then

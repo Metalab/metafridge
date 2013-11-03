@@ -1,2 +1,0 @@
-*/30  * * * * /www/cgi-bin/set_time.sh
-*/30  * * * * /etc/init.d/ntpclient
