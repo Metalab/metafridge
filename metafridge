@@ -14,13 +14,17 @@ BREAKING=0
 # animation style. Default is scrollnormal
 STYLE=0
 
-USAGE="Usage: `basename $0` [-hk][-s style] message
+usage() {
+cat <<EOF
+Usage: `basename $0` [-hk][-s style] message
 
 -h
     Displays this help text
 
 -k
-    kill a mocking bird, do not send the message to twitter as well. (Perfect for automated jobs that only make sense when seen on location, or for testing.)
+    kill a mocking bird, do not send the message to twitter
+    as well. (Perfect for automated jobs that only make sense
+    when seen on location, or for testing.)
 
 Available Styles:
     scrollnormal
@@ -30,7 +34,8 @@ Available Styles:
     blinkfast
     blinkstrobo
     sinewave
-"
+EOF
+}
 
 # Updated metafridge interface does not accept scrollup and scrolldown at the moment
 
@@ -38,7 +43,7 @@ Available Styles:
 while getopts hks: OPT; do
     case "$OPT" in
         h)
-            echo Help: $USAGE
+            usage
             exit 0
             ;;
         k)
@@ -78,7 +83,7 @@ while getopts hks: OPT; do
             ;;
         \?)
             # getopts issues an error message
-            echo $USAGE >&2
+            usage >&2
             exit 1
             ;;
     esac
@@ -90,7 +95,7 @@ shift `expr $OPTIND - 1`
 # We want at least one non-option argument. 
 # Remove this block if you don't need it.
 if [ $# -eq 0 ]; then
-    echo $USAGE >&2
+    usage >&2
     exit 1
 fi
 
